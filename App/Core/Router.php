@@ -5,45 +5,66 @@ namespace App\Core;
 class Router
 {
     const CONTROLLER_NAMESPACE = 'App\Controllers\\';
+    private string $method_name = '';
+    private string $controller_name = '';
+    private array $request_uri = [];
+    private array $config = [];
 
-    public function run(): void
+    public function __construct($config)
     {
-        $controllerName = $this->getControllerName();
-        $methodName = $this->getMethod();
-
-        echo "This is " . $controllerName . " page" . "<br>";
-
-    
-        $namespace = self::CONTROLLER_NAMESPACE . ucfirst($controllerName);
-
-        if (!class_exists($namespace)) {
-            $namespace = self::CONTROLLER_NAMESPACE . 'Error404';
-            echo "Error404 page not found" . "<br>"; 
-        }
-
-        $controller = new $namespace();
-        if (method_exists($controller, $methodName)) {
-            echo $controller->$methodName();
-        } else {
-            echo "This is : " . $methodName . " method not found" . "<br>";
-        }
+        $this->config = $config;
+        $this->process_request();
+        $this->set_controller_name();
+        $this->set_method_name();
     }
 
-    private function getControllerName(): string
+    public function run()
+{
+    $this->validate();
+    $namespace = $this->get_name_space();
+
+    $controller_obj = new $namespace;
+
+    call_user_func([$controller_obj, $this->method_name]);
+
+}
+
+
+    private function validate(): void
     {
-        return $this->prepareControllerName();
+      if(!isset($this->config[$this->controller_name . '/' . $this->method_name]))
+      {
+        $this->controller_name = 'Error404';
+        $this->method_name = 'index';
+      } else {
+        $config_array = explode('/', $this->config[$this->controller_name . '/' . $this->method_name]);
+        $this->controller_name = $config_array[0];  
+        $this->method_name = $config_array[1];      
+
+      }
+
     }
 
-    private function prepareControllerName(): string
+    private function get_name_space(): string
     {
-        $result = isset($_SERVER["REQUEST_URI"]) ? explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) : [];
-        $result = is_array($result) && !empty($result[2]) ? $result[2] : 'Main'; 
-        return $result;
+        return self::CONTROLLER_NAMESPACE . ucfirst($this->controller_name);
     }
 
-    private function getMethod(): string
+
+    private function set_controller_name(): void
     {
-        $result = isset($_SERVER["REQUEST_URI"]) ? explode('/', parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)) : [];
-        return isset($result[3]) ? $result[3] : 'index'; 
+        $this->controller_name = !empty($this->request_uri[2]) ? $this->request_uri[2] : 'main';
+    }
+
+    private function set_method_name(): void
+    {
+        $this->method_name = !empty($this->request_uri[3]) ? $this->request_uri[3] : 'index';
+    }
+
+    private function process_request(): void      
+    {
+        $this->request_uri = isset($_SERVER["REQUEST_URI"]) ? explode('/', ($_SERVER["REQUEST_URI"])) : [];
+
+
     }
 }
