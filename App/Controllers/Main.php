@@ -9,6 +9,11 @@ class Main
         echo "This is Main page";
     }
 
+    public function show_text()
+    {
+        echo "This is the second method";
+    }
+
     public function create()
     {
         echo "This is Create method";
