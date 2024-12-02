@@ -2,12 +2,14 @@
 
 namespace App\Controllers;
 
-class Error404
+use App\Core\Viewer;
+
+class Error404 
 {
     public function index()
     {
-        echo "Error404 page not found";
+        $viewer = new Viewer();
+        $viewer->setData(['message' => '404 Not Found']);
+        $viewer->include_public_template();
     }
-    
 }
-?>
