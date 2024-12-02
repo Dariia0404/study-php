@@ -2,30 +2,19 @@
 
 namespace App\Controllers;
 
-class Main
+use App\Core\Viewer;
+
+class Main 
 {
     public function index()
     {
-        echo "This is Main page";
+        $viewer = new Viewer();
+        $viewer->setData(['message' => 'Welcome to the main page!']);
+        $viewer->include_public_template();
     }
 
-    public function show_text()
-    {
-        echo "This is the second method";
-    }
-
-    public function create()
-    {
-        echo "This is Create method";
-    }
-
-    public function update()
-    {
-        echo "This is Update method";
-    }
-
-    public function delete()
-    {
-        echo "This is Delete method";
-    }
+    public function show($id){
+        include __DIR__ . '/../templates/main.php';
 }
+}
+

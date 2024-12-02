@@ -2,27 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Core\Viewer;
+
 class About
-{
+{ 
     public function index()
     {
-        echo "This is About page";
+        $viewer = new Viewer();
+        $viewer->setData(['message' => 'About Us']);
+        $viewer->include_public_template();
     }
 
-    public function create()
-    {
-        echo "This is Create method";
-    }
-
-    public function update()
-    {
-        echo "This is Update method";
-    }
-
-    public function delete()
-    {
-        echo "This is Delete method";
-    }
+    public function show($id){
+        include __DIR__ . '/../templates/about.php';
 }
-
-?>
+}

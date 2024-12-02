@@ -1,9 +1,11 @@
 <?php
 
 return [
-    'main/index' => 'Main/index',
-    'main/create' => 'Main/create',
-    'about/index' => 'About/index',
-    'gallery/index' => 'Gallery/index',
-    'error404/index' => 'Error404/index',
+    'main/view' => 'Main/view',
+    'about/view' => 'About/view',
+    'gallery/view' => 'Gallery/view',
+    'admin/main' => 'Main/view/admin',
+    'admin/about' => 'About/view/admin',
+    'admin/gallery' => 'Gallery/view/admin',
+
 ];

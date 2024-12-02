@@ -2,27 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Core\Viewer;
+
 class Gallery 
 {
     public function index()
     {
-        echo "This is Gallery page";
+        $viewer = new Viewer();
+        $viewer->setData(['message' => 'Gallery']);
+        $viewer->include_public_template();
     }
-
-    public function create()
-    {
-        echo "This is Create method";
-    }
-
-    public function update()
-    {
-        echo "This is Update method";
-    }
-
-    public function delete()
-    {
-        echo "This is Delete method";
-    }
+    public function show($id){
+    include __DIR__ . '/../templates/gallery.php';
 }
-
-?>
+}
