@@ -2,17 +2,31 @@
 
 namespace App\Controllers;
 
-use App\Core\Viewer;
+use App\Models\Gallery as GalleryModel;
 
-class Gallery 
+class Gallery extends Controller
 {
-    public function index()
+    public function view()
     {
-        $viewer = new Viewer();
-        $viewer->setData(['message' => 'Gallery']);
-        $viewer->include_public_template();
+    $model = new GalleryModel();
+    $this->data = ['data' => $model->getAllGallery()];
+    $this->public_view('Gallery/gallery-main');
     }
-    public function show($id){
-    include __DIR__ . '/../templates/gallery.php';
+    public function create()
+    {
+        echo 'This is Gallery page and Create method';
+    }
+
+    public function update()
+    {
+        $model = new GalleryModel();
+        $this->data=['data'=> $model->getOneGallery($_GET['id'])];
+        $this->public_view('Gallery/gallery-main');
+    }
+
+    public function delete()
+    {
+        echo 'This is Gallery page and Delete method';
+    }
 }
-}
+

@@ -21,6 +21,10 @@ class ComposerStaticInit9493f1b6e2a6654eec34283c4c9bdddb
     );
 
     public static $classMap = array (
+        'App\\Admin\\Admin' => __DIR__ . '/../..' . '/App/Admin/Admin.php',
+        'App\\Admin\\GalleryCategoryAdmin' => __DIR__ . '/../..' . '/App/Admin/GalleryCategoryAdmin.php',
+        'App\\Admin\\PostCategoryAdmin' => __DIR__ . '/../..' . '/App/Admin/PostCategoryAdmin.php',
+        'App\\Admin\\UserAdmin' => __DIR__ . '/../..' . '/App/Admin/UserAdmin.php',
         'App\\Controllers\\About' => __DIR__ . '/../..' . '/App/Controllers/About.php',
         'App\\Controllers\\Controller' => __DIR__ . '/../..' . '/App/Controllers/Controller.php',
         'App\\Controllers\\Error404' => __DIR__ . '/../..' . '/App/Controllers/Error404.php',
@@ -28,6 +32,11 @@ class ComposerStaticInit9493f1b6e2a6654eec34283c4c9bdddb
         'App\\Controllers\\Main' => __DIR__ . '/../..' . '/App/Controllers/Main.php',
         'App\\Core\\Router' => __DIR__ . '/../..' . '/App/Core/Router.php',
         'App\\Core\\Viewer' => __DIR__ . '/../..' . '/App/Core/Viewer.php',
+        'App\\Models\\Gallery' => __DIR__ . '/../..' . '/App/Models/Gallery.php',
+        'App\\Models\\GalleryCategory' => __DIR__ . '/../..' . '/App/Models/GalleryCategory.php',
+        'App\\Models\\Post' => __DIR__ . '/../..' . '/App/Models/Post.php',
+        'App\\Models\\PostCategory' => __DIR__ . '/../..' . '/App/Models/PostCategory.php',
+        'App\\Models\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

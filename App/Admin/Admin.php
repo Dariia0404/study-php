@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\ControllerAdmin;
+namespace App\Admin;
 
 class Admin
 {

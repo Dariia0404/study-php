@@ -33,20 +33,19 @@ class Router
 
     private function validate(): void
     {
-        if (!isset($this->config[$this->controller_name . '/' . $this->method_name])) {
+        if (!isset($this->config[$this->controller_name][$this->method_name])) {
             $this->controller_name = 'Error404';  
             $this->method_name = 'index';
         } else {
-            $config_array = explode('/', $this->config[$this->controller_name . '/' . $this->method_name]);
+            $config_array = explode('/', $this->config[$this->controller_name][$this->method_name]);
             $this->controller_name = $config_array[0]; 
             $this->method_name = $config_array[1]; 
         }
     }
 
-
     private function get_name_space(): string
     {
-        if (isset($this->request_uri[1]) && $this->request_uri[1] == 'admin') {
+        if (isset($this->request_uri[1]) && $this->request_uri[1] === 'admin') {
             return self::ADMIN_CONTROLLER_NAMESPACE . ucfirst($this->controller_name); 
         } else {
             return self::CONTROLLER_NAMESPACE . ucfirst($this->controller_name); 
@@ -66,5 +65,10 @@ class Router
     private function process_request(): void
     {
         $this->request_uri = isset($_SERVER["REQUEST_URI"]) ? explode('/', $_SERVER['REQUEST_URI']) : [];
+    }
+
+    private function isAdmin(): bool
+    {
+        return isset($this->request_uri[1]) && $this->request_uri[1] === 'admin';
     }
 }

@@ -4,16 +4,30 @@ namespace App\Controllers;
 
 use App\Core\Viewer;
 
-class About
-{ 
+class About extends Controller
+{
+    public function view()
+    {
+        $this->public_view('parts/about');
+    }
     public function index()
     {
         $viewer = new Viewer();
-        $viewer->setData(['message' => 'About Us']);
+        $viewer->setData(['message' => 'about']);
         $viewer->include_public_template();
     }
+    public function create()
+    {
+        echo 'This is About page and Create method';
+    }
 
-    public function show($id){
-        include __DIR__ . '/../templates/about.php';
-}
+    public function update()
+    {
+        echo 'This is About page and Update method';
+    }
+
+    public function delete()
+    {
+        echo 'This is About page and Delete method';
+    }
 }
