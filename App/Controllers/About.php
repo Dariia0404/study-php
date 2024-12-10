@@ -2,27 +2,32 @@
 
 namespace App\Controllers;
 
-class About
+use App\Core\Viewer;
+
+class About extends Controller
 {
+    public function view()
+    {
+        $this->public_view('parts/about');
+    }
     public function index()
     {
-        echo "This is About page";
+        $viewer = new Viewer();
+        $viewer->setData(['message' => 'about']);
+        $viewer->include_public_template();
     }
-
     public function create()
     {
-        echo "This is Create method";
+        echo 'This is About page and Create method';
     }
 
     public function update()
     {
-        echo "This is Update method";
+        echo 'This is About page and Update method';
     }
 
     public function delete()
     {
-        echo "This is Delete method";
+        echo 'This is About page and Delete method';
     }
 }
-
-?>
