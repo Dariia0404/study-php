@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\MySql\Connector;
+use App\MySql\Insert;
+
 class Post
 {
     private array $post = [
@@ -9,7 +12,7 @@ class Post
             'id' => 1,
             'title' => 'Nature',
             'content' => 'This is the content about nature.',
-            'user-Id' => 1,
+            'user-id' => 1,
             'created_at' => '2024-11-10 10:00:00',
             'updated_at' => '2024-11-10 15:00:00',
         ],
@@ -42,6 +45,14 @@ class Post
             'updated_at' => '2024-12-10 12:00:00',
         ],
     ];
+
+    public function __construct()
+    {
+        $insert = new Insert();
+        $insert->set_table_name('post');
+        var_dump($insert->buildSql());
+
+    }
     public function getAllPosts()
     {
         return $this->post;

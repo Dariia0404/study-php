@@ -22,5 +22,7 @@ return array(
     'App\\Models\\Post' => $baseDir . '/App/Models/Post.php',
     'App\\Models\\PostCategory' => $baseDir . '/App/Models/PostCategory.php',
     'App\\Models\\User' => $baseDir . '/App/Models/User.php',
+    'App\\MySql\\Connector' => $baseDir . '/App/MySql/Connector.php',
+    'App\\MySql\\Insert' => $baseDir . '/App/MySql/Insert.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );
