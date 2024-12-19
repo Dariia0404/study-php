@@ -23,6 +23,8 @@ return array(
     'App\\Models\\PostCategory' => $baseDir . '/App/Models/PostCategory.php',
     'App\\Models\\User' => $baseDir . '/App/Models/User.php',
     'App\\MySql\\Connector' => $baseDir . '/App/MySql/Connector.php',
+    'App\\MySql\\Delete' => $baseDir . '/App/MySql/Delete.php',
     'App\\MySql\\Insert' => $baseDir . '/App/MySql/Insert.php',
+    'App\\MySql\\Where' => $baseDir . '/App/MySql/Where.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );

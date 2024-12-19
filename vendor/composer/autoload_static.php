@@ -38,7 +38,9 @@ class ComposerStaticInit9493f1b6e2a6654eec34283c4c9bdddb
         'App\\Models\\PostCategory' => __DIR__ . '/../..' . '/App/Models/PostCategory.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
         'App\\MySql\\Connector' => __DIR__ . '/../..' . '/App/MySql/Connector.php',
+        'App\\MySql\\Delete' => __DIR__ . '/../..' . '/App/MySql/Delete.php',
         'App\\MySql\\Insert' => __DIR__ . '/../..' . '/App/MySql/Insert.php',
+        'App\\MySql\\Where' => __DIR__ . '/../..' . '/App/MySql/Where.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

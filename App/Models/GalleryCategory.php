@@ -2,61 +2,44 @@
 
 namespace App\Models;
 
+use App\MySql\Insert;
+
 class GalleryCategory
 {
-    private array $galleryCategory = [
-        1 => [
-            'id' => 1,
-            'name' => 'Mona Lisa',
-            'description' => 'Mona Lisa By Leonardo Da Vinci. Leonardo Mona Lisa is one of the most famous paintings in the world.',
-            'created_at' => '2024-11-10 10:00:00',
-            'updated_at' => '2024-11-10 15:00:00',
-        ],
+    private array $galleryCategory = [];
+    public int $id;
+    public string $name;
+    public string $description;
+    public string $created;
+    public string $updated;
+    
+        
+    public function __construct()
+    {
 
-        [
-            'id' => 2,
-            'name' => 'Starry Night',
-            'description' => 'Starry Night over the Rhône, Vincent van Gogh.',
-            'created_at' => '2024-12-10 09:00:00',
-            'updated_at' => '2024-12-10 10:00:00',
-        ],
-
-        [
-            'id' => 3,
-            'name' => 'American Gothic',
-            'description' => 'The American Gothic is one of those paintings that you seen a million times without paying much attention to it.',
-            'created_at' => '2024-12-10 10:00:00',
-            'updated_at' => '2024-12-10 11:00:00',
-        ],
-
-        [
-            'id' => 4,
-            'name' => 'Water Lilies',
-            'description' => 'Water Lilies Series. Monet was obsessed with his garden and the changing light.',
-            'created_at' => '2024-12-10 11:00:00',
-            'updated_at' => '2024-12-10 12:00:00',
-        ],
-    ];
-    public function getAllCategories()
+    }
+    public function getAllGalleryCategories()
     {
         return $this->galleryCategory;
     }
 
-    public function getOneGalleryCategory(int $id): array
+    public function getGalleryCategoryById($id)
     {
-        if (!empty($this->galleryCategory[$id])){
-        return $this->galleryCategory[$id];
-    }
-    throw new \Exception('id is absent');
+        return ['id' => $id, 'name' => 'Category 1', 'description' => 'Text'];
     }
 
-    public function getCategoryById($id)
+    public function save(array $data): void
     {
-        return ['id' => $id, 'name' => 'Nature'];
+        $insert = new Insert();
+        $insert->set_table_name('galleryCategory');
+        $insert->set_fieldset($data);
+        $insert->execute();
     }
 
-    public function deleteCategory($id)
+    public function to_array()
     {
-        echo 'This is GalleryCategory page and Delete method';
+        return get_class_vars(get_class($this));
     }
+
+  
 }

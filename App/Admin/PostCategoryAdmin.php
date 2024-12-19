@@ -9,7 +9,7 @@ class PostCategoryAdmin
     public function index()
     {
         $categoryModel = new PostCategory();
-        $categories = $categoryModel->getAllCategories();
+        $categories = $categoryModel->getAllPostCategories();
         include __DIR__ . '/../../adminFolder/templates/postCategory/index.php';
     }
 
@@ -21,14 +21,7 @@ class PostCategoryAdmin
     public function update()
     {
         $categoryModel = new PostCategory();
-        $category = $categoryModel->getCategoryById($_GET['id']);
+        $category = $categoryModel->getPostCategoryById($_GET['id']);
         include __DIR__ . '/../../adminFolder/templates/postCategory/update.php';
-    }
-
-    public function delete()
-    {
-        $categoryModel = new PostCategory();
-        $categoryModel->deleteCategory($_GET['id']);
-        header('Location: /admin/postCategory');
     }
 }

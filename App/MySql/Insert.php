@@ -2,21 +2,19 @@
 
 namespace App\MySql;
 
+use App\MySql\Connector;
 use PDO;
-use Exception;
 
 class Insert
 {
     private string $tableName;
-    private array $fields = ['test1', 'test2', 'test3', 'test4'];
-    private array $values = [['value1', 'value2', 'value3', 'value4'], ['value1', 'value2', 'value3', 'value4']];
-    private Connector $connector;
-    private PDO $pdo;
+    private array $fields = [];
+    private array $values = [];
+    private PDO $connect;
 
     public function __construct()
     {
-        $this->connector = new Connector();
-        $this->pdo = $this->connector->connect();
+        $this->connect = (new Connector())->connect();
     }
 
     public function set_table_name(string $table_name): void
@@ -40,32 +38,37 @@ class Insert
         return 'INSERT INTO ' . $this->tableName . ' (' . implode(', ', $this->fields) . ') VALUES ' . $this->get_values();
     }
 
+    public function execute()
+    {
+        $this->connect->query($this->buildSql());
+    }
+
     private function check_floors(): bool
     {
         return is_array($this->values[0]);
     }
 
     private function validate_fields_values(): void
-    {
-        $fieldsCount = count($this->fields);
-        
-        if ($this->check_floors()) {
-            foreach ($this->values as $value) {
-                if (count($value) !== $fieldsCount) {
-                    throw new Exception('Not match the number of fields');
-                }
-            }
-        } else {
-            if (count($this->values) !== $fieldsCount) {
-                throw new Exception('not match the number of fields');
+{
+    $fieldsCount = count($this->fields);
+    
+    if ($this->check_floors()) {
+        foreach ($this->values as $value) {
+            if (count($value) !== $fieldsCount) {
+                throw new \Exception('Not match for the current model');
             }
         }
+    } else {
+        if (count($this->values) !== $fieldsCount) {
+            throw new \Exception('Fields count does not match');
+        }
     }
+}
 
     private function get_values(): string
     {
         if (empty($this->values)) {
-            throw new Exception('Invalid value');
+            throw new \Exception('Invalid value');
         }
 
         $result = [];
@@ -83,6 +86,13 @@ class Insert
 
     private function escape_value($value): string
     {
-        return "'" . addslashes($value) . "'"; 
+        if (is_null($value)) {
+            return "NULL";
+        } elseif (is_numeric($value)) {
+            return $value;
+        } else {
+            return "'" . addslashes($value) . "'"; 
+        }
     }
+    
 }
