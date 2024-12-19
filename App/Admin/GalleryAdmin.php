@@ -25,10 +25,5 @@ class GalleryAdmin
         include __DIR__ . '/../../adminFolder/templates/gallery/update.php';
     }
 
-    public function delete()
-    {
-        $galleryModel = new Gallery();
-        $galleryModel->deleteGallery($_GET['id']);
-        header('Location: /admin/gallery');
-    }
+
 }

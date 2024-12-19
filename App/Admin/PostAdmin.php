@@ -4,31 +4,37 @@ namespace App\Controllers\ControllerAdmin;
 
 use App\Models\Post;
 
-class PostAdmin
+class PostAdmin extends Post
 {
     public function index()
     {
-        $postModel = new Post();
+        $postModel = new PostAdmin();
         $posts = $postModel->getAllPosts();
         include __DIR__ . '/../../adminFolder/templates/post/index.php';
     }
 
-    public function create()
+    public function create(): void
     {
+        if(!empty($_POST))
+        {
+            $postModel = new PostAdmin();
+            $postModel->save(array_intersect_key(array_filter($_POST), $postModel->to_array()));
+        }
         include __DIR__ . '/../../adminFolder/templates/post/create.php';
     }
 
     public function update()
     {
-        $postModel = new Post();
+        $postModel = new PostAdmin();
         $post = $postModel->getPostById($_GET['id']);
         include __DIR__ . '/../../adminFolder/templates/post/update.php';
     }
 
     public function delete()
     {
-        $postModel = new Post();
-        $postModel->deletePost($_GET['id']);
-        header('Location: /admin/post');
+        $postModel = new PostAdmin();
+        $this->data=['data'=> $postModel->getPostById($_GET['id'])];
+        include __DIR__ . '/../../adminFolder/templates/post/delete.php';
     }
-}
+        
+    }

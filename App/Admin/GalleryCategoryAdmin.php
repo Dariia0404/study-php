@@ -9,7 +9,7 @@ class GalleryCategoryAdmin
     public function index()
     {
         $categoryModel = new GalleryCategory();
-        $categories = $categoryModel->getAllCategories();
+        $categories = $categoryModel->getAllGalleryCategories();
         include __DIR__ . '/../../adminFolder/templates/galleryCategory/index.php';
     }
 
@@ -21,14 +21,7 @@ class GalleryCategoryAdmin
     public function update()
     {
         $categoryModel = new GalleryCategory();
-        $category = $categoryModel->getCategoryById($_GET['id']);
+        $category = $categoryModel->getGalleryCategoryById($_GET['id']);
         include __DIR__ . '/../../adminFolder/templates/galleryCategory/update.php';
-    }
-
-    public function delete()
-    {
-        $categoryModel = new GalleryCategory();
-        $categoryModel->deleteCategory($_GET['id']);
-        header('Location: /admin/galleryCategory');
     }
 }

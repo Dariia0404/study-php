@@ -24,11 +24,4 @@ class UserAdmin
         $user = $userModel->getUserById($_GET['id']);
         include __DIR__ . '/../../adminFolder/templates/user/update.php';
     }
-
-    public function delete()
-    {
-        $userModel = new User();
-        $userModel->deleteUser($_GET['id']);
-        header('Location: /admin/user');
-    }
 }
